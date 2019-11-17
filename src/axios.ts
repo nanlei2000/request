@@ -24,7 +24,6 @@ instance.interceptors.request.use(
     },
     error => {
         // 请求错误
-        console.error(error); // for debug
         return Promise.reject({
             msg: (
                 typeof error === 'object' ?
@@ -53,7 +52,6 @@ instance.interceptors.response.use(
     },
     // 响应错误
     (error: Error) => {
-        console.error(error); // for debug
         return Promise.reject({
             msg: (
                 typeof error === 'object' ?
