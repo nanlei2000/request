@@ -1,0 +1,28 @@
+{
+  "name": "request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanlei2000/request.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nanlei2000/request/issues"
+  },
+  "homepage": "https://github.com/nanlei2000/request#readme",
+  "dependencies": {
+    "@types/qs": "^6.9.0",
+    "axios": "^0.19.0",
+    "fp-ts": "^2.1.2",
+    "qs": "^6.9.1",
+    "rxjs": "^6.5.3",
+    "typescript": "^3.7.2"
+  }
+}
