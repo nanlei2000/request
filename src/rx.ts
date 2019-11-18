@@ -3,6 +3,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import axios, { CancelToken } from 'axios';
 import { request, ErrorRes } from './axios';
 import * as E from 'fp-ts/lib/Either';
+import { pipe as fp } from 'fp-ts/lib/pipeable';
 export const genRequestObservable = <Params extends object, Res extends object>(url: string) => (data: Params) =>
     getAxiosObservable<Res>(token => {
         return request({
@@ -36,4 +37,23 @@ export function getAxiosObservable<T>(request: (cancelToken: CancelToken) => Pro
 
         return () => cancelToken.cancel();
     });
+}
+type CaseHandle<E, V> = (handles: {
+    Ok?: (value: V) => unknown;
+    Err: (err: E) => unknown;
+}) => E.Either<E, V>;
+
+
+export function Match<V, E>(res: E.Either<E, V>): CaseHandle<E, V> {
+    const func: CaseHandle<E, V> = handles => {
+        fp(
+            res,
+            E.fold(
+                err => handles.Err(err),
+                res => handles.Ok?.(res)
+            )
+        );
+        return res;
+    };
+    return func;
 }
