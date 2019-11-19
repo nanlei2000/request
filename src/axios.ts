@@ -10,6 +10,12 @@ export interface ErrorRes {
     msg: string;
     code: number;
 }
+
+export enum AxiosError {
+    Request = -1,
+    Response = -2
+}
+
 // https://api.github.com/repos/vuejs/vue
 // 创建axios实例
 const BaseURL = 'https://api-wapbi.oneniceapp.com';
@@ -31,7 +37,7 @@ instance.interceptors.request.use(
                     String(error)
             )
                 || '请求错误',
-            code: -1,
+            code: AxiosError.Request,
         });
     }
 );
@@ -59,7 +65,7 @@ instance.interceptors.response.use(
                     String(error)
             )
                 || '响应错误',
-            code: -2,
+            code: AxiosError.Response,
         });
     }
 );
